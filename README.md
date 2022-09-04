@@ -5,3 +5,8 @@ This project is part of a a remastered version of my final project for HarvardX'
 ```
 https://www.youtube.com/watch?v=k6B14KtYqks
 ```
+
+## Limitations
+This project uses the CoinGecko API to gather real-time information and historical data on a wide range of crypto currencies. The API comes with a free tier that allows up to 50 API calls a minute. Because of the limited number of calls, this app focuses on the historical data of each coin for charting and analysis purposes. Unfortunately, the last entry of the historical data is the data of the day prior. That means that the app always lags one day behind the current course to minimize the number of calls that must be made to gather all the data.
+
+Because of the call limitation, the number of different coins per portfolio is also limited to 40 coins.

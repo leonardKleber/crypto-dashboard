@@ -17,7 +17,7 @@ def get_max_historical_data(coin, currency):
     response = get_api_response(url)
     if response == 'rate limit reached':
         return response
-    elif response == 'rate limit reached':
+    elif response == 'connection error':
         return response
     else:
         prices = []
