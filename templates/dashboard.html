@@ -4,6 +4,15 @@
     <title>MVW - Dashboard</title>
 </head>
 <body>
-    SUCCESS
+    <canvas id="chart"></canvas> 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const config = JSON.parse('{{ config | tojson | safe }}');
+
+    var chart = new Chart(
+        document.getElementById('chart'),
+        config
+    );
+</script>
 </html>
