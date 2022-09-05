@@ -1,3 +1,4 @@
+# Generates a configuration json for the chart on dashboard page.
 def generate_chart(data, performance):
     if performance > 0:
         color_string = 'rgb(0,255,0)'

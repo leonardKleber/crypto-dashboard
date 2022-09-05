@@ -4,7 +4,8 @@
     <title>MVW - Dashboard</title>
 </head>
 <body>
-    {{ config['performance'] }}
+    <div>{{ config['worth'] }}$</div>
+    <div>{{ config['performance'] }}%</div>
     <canvas id="chart"></canvas> 
     <div>
         <button onclick="configure_dashboard(1)">1W</button>
@@ -14,6 +15,24 @@
         <button onclick="configure_dashboard(5)">5Y</button>
         <button onclick="configure_dashboard(0)">Total</button>
     </div>
+    <table>
+        <tr>
+            <th>Coin</th>
+            <th>Amount</th>
+            <th>Cost</th>
+            <th>Worth</th>
+            <th>Gain</th>
+        </tr>
+        {% for i in config['assets'] %}
+        <tr>
+            <td>{{ i['coin'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td>{{ i['cost'] }}$</td>
+            <td>{{ i['worth'] }}$</td>
+            <td>{{ i['gain'] }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

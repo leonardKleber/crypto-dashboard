@@ -4,6 +4,30 @@ from src.crypto import cut_historical_data
 from src.chart import generate_chart
 
 
+# Generates a configuration json for the dashboard page.
+def generate_dashboard(user_assets, currency):
+    all_coin_data = get_all_coin_data(user_assets, currency)
+    if all_coin_data == 'connection error' or all_coin_data == 'rate limit reached':
+        return all_coin_data
+    else:
+        summed_data = sum_up_historical_datas(user_assets, all_coin_data)
+        performance = get_portfolio_performance(user_assets, all_coin_data)
+        print(generate_user_assets(user_assets, all_coin_data))
+        return {
+            'chart': generate_user_charts(summed_data, performance),
+            'performance': performance,
+            'worth': get_portfolio_worth(summed_data),
+            'assets': generate_user_assets(user_assets, all_coin_data)
+        }
+
+
+# Get current portfolio worth.
+def get_portfolio_worth(portfolio_data):
+    copy = portfolio_data.copy()
+    copy.reverse()
+    return copy[0]
+
+
 # Convert date string from database to datetime object.
 def date_to_datetime(date):
     day = date[0] + date[1]
@@ -19,20 +43,6 @@ def get_days_since_investment(date):
     return difference
 
 
-# Generates a configuration json for the dashboard page.
-def generate_dashboard(user_assets, currency):
-    all_coin_data = get_all_coin_data(user_assets, currency)
-    if all_coin_data == 'connection error' or all_coin_data == 'rate limit reached':
-        return all_coin_data
-    else:
-        summed_data = sum_up_historical_datas(user_assets, all_coin_data)
-        performance = get_portfolio_performance(user_assets, all_coin_data)
-        return {
-            'chart': generate_user_charts(summed_data, performance),
-            'performance': performance
-        }
-
-
 # Generates a configuration json for the different timeframe charts.
 def generate_user_charts(portfolio_data, performance):
     return {
@@ -43,6 +53,28 @@ def generate_user_charts(portfolio_data, performance):
         'five_years': generate_chart(cut_historical_data(portfolio_data, 1825), performance),
         'total': generate_chart(portfolio_data, performance)
     }
+
+
+# Generates a configuration json to list all user assets.
+def generate_user_assets(user_assets, all_coin_data):
+    all_historical_data = total_historical_data(user_assets, all_coin_data)
+    assets = []
+    counter = 0
+    for i in user_assets:
+        asset_list = all_historical_data[counter]
+        cost = asset_list[0]
+        reverse_asset_list = list(reversed(asset_list))
+        worth = reverse_asset_list[0]
+        gain = get_asset_performance(cost, worth)
+        assets.append({
+            'coin': i['coin'],
+            'amount': i['amount'],
+            'cost': cost,
+            'worth': worth,
+            'gain': gain
+        })
+        counter = counter + 1
+    return assets
 
 
 # Gets a list of different coins the user owns and its historical data.
@@ -110,3 +142,8 @@ def get_portfolio_performance(user_assets, all_coin_data):
     for i in performances:
         sum_performances = sum_performances + i
     return round(sum_performances / len(performances), 2)
+
+
+# Gets the performance of a single asset.
+def get_asset_performance(investment, current_value):
+    return round((((current_value - investment) / investment) * 100), 2)
