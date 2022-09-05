@@ -16,11 +16,11 @@ def get_price_days_ago(historical_data, days_ago):
 
 
 # Gets the performance of an investment based on the time of the investment.
-def get_performance(historical_data, investment_days_ago):
-    investment = get_price_days_ago(historical_data, investment_days_ago)
-    current_price = get_current_price(historical_data)
-    gain = ((current_price - investment) / investment) * 100
-    return round(gain, 2)
+# def get_performance(historical_data, investment_days_ago):
+#     investment = get_price_days_ago(historical_data, investment_days_ago)
+#     current_price = get_current_price(historical_data)
+#     gain = ((current_price - investment) / investment) * 100
+#     return round(gain, 2)
 
 
 # Gets the historical data of a coin from today to a number of days back.

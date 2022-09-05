@@ -17,9 +17,7 @@ def get_api_response(url):
 def get_max_historical_data(coin, currency):
     url = f'https://api.coingecko.com/api/v3/coins/{coin}/market_chart?vs_currency={currency}&days=max'
     response = get_api_response(url)
-    if response == 'rate limit reached':
-        return response
-    elif response == 'connection error':
+    if response == 'rate limit reached' or response == 'connection error':
         return response
     else:
         prices = []
