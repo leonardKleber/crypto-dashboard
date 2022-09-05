@@ -25,10 +25,16 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template(
-        'dashboard.html',
-        config=generate_dashboard(USER_ASSETS, CURRENCY)
-    )
+    config = generate_dashboard(USER_ASSETS, CURRENCY)
+    if config == 'connection error':
+        return render_template('connection_error.html')
+    elif config == 'rate limit reached':
+        return render_template('rate_limit.html')
+    else:
+        return render_template(
+            'dashboard.html',
+            config=config
+        )
 
 
 if __name__ == '__main__':
