@@ -6,6 +6,10 @@
 <body>
     <h1>OOPS!</h1>
     <h2>It seems like you have reached the CoinGecko API's rate limit. Please wait a minute and try again.</h2>
-    <button>Try Again</button>
+    <div id="time">01:00</div>
+    <a href="/dashboard">
+        <button>Try Again</button>
+    </a>
 </body>
+<script src="{{ url_for('static', filename='scripts/timer.js') }}"></script>
 </html>
