@@ -1,10 +1,8 @@
-# def generate_chart(data, performance):
-def generate_chart(data):
-    # if performance > 0:
-    #     color_string = 'rgb(0,255,0)'
-    # else:
-    #     color_string = 'rgb(255,0,0)'
-    color_string = 'rgb(0,0,0)'
+def generate_chart(data, performance):
+    if performance > 0:
+        color_string = 'rgb(0,255,0)'
+    else:
+        color_string = 'rgb(255,0,0)'
     config = {
         'type': 'line',
         'data': {

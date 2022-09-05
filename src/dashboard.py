@@ -26,10 +26,23 @@ def generate_dashboard(user_assets, currency):
         return all_coin_data
     else:
         summed_data = sum_up_historical_datas(user_assets, all_coin_data)
+        performance = get_portfolio_performance(user_assets, all_coin_data)
         return {
-            'chart': generate_chart(summed_data),
-            'performance': get_portfolio_performance(user_assets, all_coin_data)
+            'chart': generate_user_charts(summed_data, performance),
+            'performance': performance
         }
+
+
+# Generates a configuration json for the different timeframe charts.
+def generate_user_charts(portfolio_data, performance):
+    return {
+        'week': generate_chart(cut_historical_data(portfolio_data, 7), performance),
+        'month': generate_chart(cut_historical_data(portfolio_data, 30), performance),
+        'year': generate_chart(cut_historical_data(portfolio_data, 365), performance),
+        'three_years': generate_chart(cut_historical_data(portfolio_data, 1095), performance),
+        'five_years': generate_chart(cut_historical_data(portfolio_data, 1825), performance),
+        'total': generate_chart(portfolio_data, performance)
+    }
 
 
 # Gets a list of different coins the user owns and its historical data.

@@ -6,6 +6,14 @@
 <body>
     {{ config['performance'] }}
     <canvas id="chart"></canvas> 
+    <div>
+        <button onclick="configure_dashboard(1)">1W</button>
+        <button onclick="configure_dashboard(2)">1M</button>
+        <button onclick="configure_dashboard(3)">1Y</button>
+        <button onclick="configure_dashboard(4)">3Y</button>
+        <button onclick="configure_dashboard(5)">5Y</button>
+        <button onclick="configure_dashboard(0)">Total</button>
+    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -13,7 +21,24 @@
 
     var chart = new Chart(
         document.getElementById('chart'),
-        config.chart
+        config.chart.total
     );
+
+    function configure_dashboard(timeframe_id) {
+        var chart_config;
+        if(timeframe_id == 0) chart_config = config.chart.total;
+        if(timeframe_id == 1) chart_config = config.chart.week;
+        if(timeframe_id == 2) chart_config = config.chart.month;
+        if(timeframe_id == 3) chart_config = config.chart.year;
+        if(timeframe_id == 4) chart_config = config.chart.three_years;
+        if(timeframe_id == 5) chart_config = config.chart.five_years;
+    
+        var existing_chart = Chart.getChart('chart').destroy();
+
+        var chart = new Chart(
+            document.getElementById('chart'),
+            chart_config
+        );
+    }
 </script>
 </html>
