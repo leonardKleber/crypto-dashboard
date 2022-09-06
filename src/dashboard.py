@@ -12,7 +12,6 @@ def generate_dashboard(user_assets, currency):
     else:
         summed_data = sum_up_historical_datas(user_assets, all_coin_data)
         performance = get_portfolio_performance(user_assets, all_coin_data)
-        print(generate_user_assets(user_assets, all_coin_data))
         return {
             'chart': generate_user_charts(summed_data, performance),
             'performance': performance,
@@ -67,7 +66,7 @@ def generate_user_assets(user_assets, all_coin_data):
         worth = reverse_asset_list[0]
         gain = get_asset_performance(cost, worth)
         assets.append({
-            'coin': i['coin'],
+            'coin': i['coin'].upper(),
             'amount': i['amount'],
             'cost': cost,
             'worth': worth,

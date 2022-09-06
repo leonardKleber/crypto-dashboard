@@ -2,37 +2,53 @@
 <html>
 <head>
     <title>MVW - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="/static/stylesheets/dashboard.css" rel="stylesheet">
 </head>
 <body>
-    <div>{{ config['worth'] }}$</div>
-    <div>{{ config['performance'] }}%</div>
-    <canvas id="chart"></canvas> 
-    <div>
-        <button onclick="configure_dashboard(1)">1W</button>
-        <button onclick="configure_dashboard(2)">1M</button>
-        <button onclick="configure_dashboard(3)">1Y</button>
-        <button onclick="configure_dashboard(4)">3Y</button>
-        <button onclick="configure_dashboard(5)">5Y</button>
-        <button onclick="configure_dashboard(0)">Total</button>
+    <div class="side_bar">
+        <div class="widget">Home</div>
+        <div class="widget">Profile</div>
+        <div class="widget">Sign Out</div>
     </div>
-    <table>
-        <tr>
-            <th>Coin</th>
-            <th>Amount</th>
-            <th>Cost</th>
-            <th>Worth</th>
-            <th>Gain</th>
-        </tr>
-        {% for i in config['assets'] %}
-        <tr>
-            <td>{{ i['coin'] }}</td>
-            <td>{{ i['amount'] }}</td>
-            <td>{{ i['cost'] }}$</td>
-            <td>{{ i['worth'] }}$</td>
-            <td>{{ i['gain'] }}%</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="dashboard">
+        <div class="total_numbers">
+            <label>{{ config['worth'] }}$</label>&nbsp;
+            <label class="performance">{{ config['performance'] }}%</label>
+        </div>
+        <div class="chart_div" alig>
+            <canvas id="chart" class="chart"></canvas> 
+        </div>
+        <div align="center">
+            <button class="chart_button" onclick="configure_dashboard(1)">1W</button>
+            <button class="chart_button" onclick="configure_dashboard(2)">1M</button>
+            <button class="chart_button" onclick="configure_dashboard(3)">1Y</button>
+            <button class="chart_button" onclick="configure_dashboard(4)">3Y</button>
+            <button class="chart_button" onclick="configure_dashboard(5)">5Y</button>
+            <button class="chart_button" onclick="configure_dashboard(0)">MAX</button>
+        </div>
+        <table>
+            <tr>
+                <th>Coin</th>
+                <th>Cost</th>
+                <th>Worth</th>
+                <th>Gain</th>
+            </tr>
+            {% for i in config['assets'] %}
+            <tr>
+                <td>
+                    {{ i['coin'] }}<br/>
+                    {{ i['amount'] }}x
+                </td>
+                <td>{{ i['cost'] }}$</td>
+                <td>{{ i['worth'] }}$</td>
+                <td>{{ i['gain'] }}%</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
