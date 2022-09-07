@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MVW - Add Asset</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="/static/stylesheets/add_asset.css" rel="stylesheet">
+</head>
+<body>
+    <form action="/add_asset" method="post">
+        <div>Enter coin you want to add:</div>
+        <input type="text" name="coin" list="coins">
+        <datalist id="coins">
+            {% for i in coins %}
+            <option value="{{ i }}"></option>
+            {% endfor %}
+        </datalist>
+        <div>Enter the amount that you bought:</div>
+        <input type="number" name="amount">
+        <div>Enter the date that you bought the coin:</div>
+        <input type="text" name="date">
+        <button type="submit">+</button>
+    </form>
+</body>
+</html>

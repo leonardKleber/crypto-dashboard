@@ -1,5 +1,6 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from src.dashboard import generate_dashboard
+from src.add_asset import get_all_available_coins
 
 
 # A pseudo database for testing purposes.
@@ -35,6 +36,33 @@ def dashboard():
             'dashboard.html',
             config=config
         )
+
+
+@app.route('/add_asset', methods=['GET', 'POST'])
+def add_asset():
+    if request.method == 'POST':
+        coin = request.form.get('coin')
+        amount = request.form.get('amount')
+        date = request.form.get('date')
+        USER_ASSETS.append({
+            'id': 'x',
+            'user_id': 1,
+            'coin': coin,
+            'amount': int(amount),
+            'date': date
+        })
+        return redirect(url_for('dashboard'))
+    else:
+        supported_coins = get_all_available_coins()
+        if supported_coins == 'connection error':
+            return render_template('connection_error.html')
+        elif supported_coins == 'rate limit reached':
+            return render_template('rate_limit.html')
+        else:
+            return render_template(
+                'add_asset.html',
+                coins=supported_coins
+            )
 
 
 if __name__ == '__main__':
