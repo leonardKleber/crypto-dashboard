@@ -146,3 +146,21 @@ def get_portfolio_performance(user_assets, all_coin_data):
 # Gets the performance of a single asset.
 def get_asset_performance(investment, current_value):
     return round((((current_value - investment) / investment) * 100), 2)
+
+
+# Checks if a string is a valid date.
+def check_valid_date(date):
+    if len(date) != 10:
+        return False
+    if date[2] != '-' or date[5] != '-':
+        return False
+    day = int(date[0] + date[1])
+    month = int(date[3] + date[4])
+    year = int(date[6] + date[7] + date[8] + date[9])
+    if day > 31 or day < 1:
+        return False
+    if month > 12 or month < 1:
+        return False
+    if year < 1:
+        return False
+    return True

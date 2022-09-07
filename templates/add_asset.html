@@ -18,19 +18,19 @@
             <form action="/add_asset" method="post">
                 <div class="element">
                     <label>Coin</label>
-                    <label class="right"><input type="text" name="coin" list="coins" id="coin_input"></label>
+                    <label class="right"><input type="text" name="coin" list="coins"></label>
                 </div>
-                <div id="coin_error" class="error"></div>
+                <div id="coin_message" class="error"></div>
                 <div class="element">
                     <label>Amount</label>
-                    <label class="right"><input type="number" name="amount" id="amount_input"></label>
+                    <label class="right"><input type="number" name="amount"></label>
                 </div>
-                <div id="amount_error" class="error"></div>
+                <div id="amount_message" class="error"></div>
                 <div class="element">
                     <label>Date</label>
-                    <label class="right"><input type="text" name="date" id="date_input"></label>
+                    <label class="right"><input type="text" name="date"></label>
                 </div>
-                <div id="date_error" class="error"></div>
+                <div id="date_message" class="error"></div>
                 <div align="center">
                     <button class="add" type="submit">+</button>
                 </div>
@@ -45,24 +45,12 @@
 </datalist>
 <script>
     const coins = JSON.parse('{{ coins | tojson | safe }}');
+    const messages = JSON.parse('{{ messages | tojson | safe }}');
 
-    var coin = document.getElementById("coin_input");
-    var amount = document.getElementById("amount_input");
-    var date = document.getElementById("date_input");
+    console.log(messages)
 
-    coin.onkeyup = function() {
-        var text = this.value;
-        document.getElementById("coin_error").innerHTML = text;
-    }
-
-    amount.onkeyup = function() {
-        var text = this.value;
-        document.getElementById("amount_error").innerHTML = text;
-    }
-
-    date.onkeyup = function() {
-        var text = this.value;
-        document.getElementById("date_error").innerHTML = text;
-    }
+    document.getElementById("coin_message").innerHTML = messages.coin;
+    document.getElementById("amount_message").innerHTML = messages.amount;
+    document.getElementById("date_message").innerHTML = messages.date;
 </script>
 </html>
