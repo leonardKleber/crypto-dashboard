@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from src.dashboard import generate_dashboard
-from src.add_asset import get_all_available_coins
+from src.api import get_all_available_coins
 
 
 # A pseudo database for testing purposes.
