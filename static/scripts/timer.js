@@ -14,6 +14,6 @@ function updateTimer() {
             var string = '00:0' + minutes_string;
             document.querySelector('#time').innerHTML = string;
         }
-    }, 1400)
+    }, 1500)
 }
 updateTimer()
