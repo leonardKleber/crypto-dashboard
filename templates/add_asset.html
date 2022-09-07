@@ -8,19 +8,61 @@
     <link href="/static/stylesheets/add_asset.css" rel="stylesheet">
 </head>
 <body>
-    <form action="/add_asset" method="post">
-        <div>Enter coin you want to add:</div>
-        <input type="text" name="coin" list="coins">
-        <datalist id="coins">
-            {% for i in coins %}
-            <option value="{{ i }}"></option>
-            {% endfor %}
-        </datalist>
-        <div>Enter the amount that you bought:</div>
-        <input type="number" name="amount">
-        <div>Enter the date that you bought the coin:</div>
-        <input type="text" name="date">
-        <button type="submit">+</button>
-    </form>
+    <div class="side_bar">
+        <div class="widget">Home</div>
+        <div class="widget">Profile</div>
+        <div class="widget">Sign Out</div>
+    </div>
+    <div class="site">
+        <div class="container">
+            <form action="/add_asset" method="post">
+                <div class="element">
+                    <label>Coin</label>
+                    <label class="right"><input type="text" name="coin" list="coins" id="coin_input"></label>
+                </div>
+                <div id="coin_error" class="error"></div>
+                <div class="element">
+                    <label>Amount</label>
+                    <label class="right"><input type="number" name="amount" id="amount_input"></label>
+                </div>
+                <div id="amount_error" class="error"></div>
+                <div class="element">
+                    <label>Date</label>
+                    <label class="right"><input type="text" name="date" id="date_input"></label>
+                </div>
+                <div id="date_error" class="error"></div>
+                <div align="center">
+                    <button class="add" type="submit">+</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+<datalist id="coins">
+    {% for i in coins %}
+    <option value="{{ i }}"></option>
+    {% endfor %}
+</datalist>
+<script>
+    const coins = JSON.parse('{{ coins | tojson | safe }}');
+
+    var coin = document.getElementById("coin_input");
+    var amount = document.getElementById("amount_input");
+    var date = document.getElementById("date_input");
+
+    coin.onkeyup = function() {
+        var text = this.value;
+        document.getElementById("coin_error").innerHTML = text;
+    }
+
+    amount.onkeyup = function() {
+        var text = this.value;
+        document.getElementById("amount_error").innerHTML = text;
+    }
+
+    date.onkeyup = function() {
+        var text = this.value;
+        document.getElementById("date_error").innerHTML = text;
+    }
+</script>
 </html>
