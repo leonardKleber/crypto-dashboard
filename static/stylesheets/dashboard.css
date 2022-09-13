@@ -1,7 +1,20 @@
+:root {
+    --red-text: rgb(255,0,0);
+    --red-background: rgb(255,192,192);
+    --green-text: rgb(32,192,32);
+    --green-background: rgb(192,255,192);
+    
+    --background-color: rgb(255,255,255);
+    --text-color: rgb(0,0,0);
+
+    --soft-seperation: rgb(224,224,224);
+    --hard-seperation: rgb(128,128,128);
+}
+
 html, body {
     font-family: 'Poppins';
-    background-color: rgb(255,255,255);
-    color: rgb(0,0,0);
+    background-color: var(--background-color);
+    color: var(--text-color);
     width: 100%;
     height: 100%;
     margin: 0;
@@ -13,9 +26,9 @@ html, body {
     width: 25%;
     height: 100%;
     left: 0;
-    background-color: rgb(255,255,255);
-    border-right: 1px solid rgb(128,128,128);
-    color: rgb(0,0,0);
+    background-color: var(--background-color);
+    border-right: 1px solid var(--hard-seperation);
+    color: var(--text-color);
     font-weight: 600;
 }
 
@@ -26,8 +39,8 @@ html, body {
 }
 
 .widget:hover {
-    background-color: rgb(0,0,0);
-    color: rgb(255,255,255);
+    background-color: var(--text-color);
+    color: var(--background-color);
 }
 
 .dashboard {
@@ -47,8 +60,8 @@ html, body {
     right: 0;
     font-weight: 500;
     font-size: 0.5em;
-    background-color: rgb(192,255,192);
-    color: rgb(0,255,0);
+    background-color: var(--green-background);
+    color: var(--green-text);
     padding: 0.15em;
     border-radius: 0.25em;
 }
@@ -57,31 +70,31 @@ html, body {
     right: 0;
     font-weight: 500;
     font-size: 0.5em;
-    background-color: rgb(255,192,192);
-    color: rgb(255,0,0);
+    background-color: var(--red-background);
+    color: var(--red-text);
     padding: 0.15em;
     border-radius: 0.25em;
 }
 
 .positive_gain {
-    background-color: rgb(192,255,192);
-    color: rgb(0,255,0);
+    background-color: var(--green-background);
+    color: var(--green-text);
     display: inline-block;
     padding: 0.15em;
     border-radius: 0.2em;
 }
 
 .negative_gain {
-    background-color: rgb(255,192,192);
-    color: rgb(255,0,0);
+    background-color: var(--red-background);
+    color: var(--red-text);
     display: inline-block;
     padding: 0.15em;
     border-radius: 0.25em;
 }
 
 .chart_button {
-    background-color: rgb(255,255,255);
-    color: rgb(0,0,0);
+    background-color: var(--background-color);
+    color: var(--text-color);
     border: 0;
     font-size: 1em;
     font-weight: 600;
@@ -93,8 +106,8 @@ html, body {
 }
 
 .chart_button:hover {
-    background-color: rgb(0,0,0);
-    color: rgb(255,255,255);
+    background-color: var(--text-color);
+    color: var(--background-color);
 }
 
 table {
@@ -103,14 +116,14 @@ table {
 }
 
 th, td {
-    border-bottom: 1px solid rgb(224,224,224);
+    border-bottom: 1px solid var(--soft-seperation);
     padding: 1em;
     text-align: left;
     font-weight: 600;
 }
 
 th {
-    color: rgb(128,128,128)
+    color: var(--hard-seperation);
 }
 
 a {
@@ -127,14 +140,14 @@ a {
     align-items: center;
     margin-top: 1em;
     margin-bottom: 1em;
-    background-color: rgb(255,255,255);
-    color: rgb(0,0,0);
-    border: 0.05em solid rgb(0,0,0);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 0.05em solid var(--text-color);
     border-radius: 1.05em;
 }
 .add:hover {
-    background-color: rgb(0,0,0);
-    color: rgb(255,255,255);
+    background-color: var(--text-color);
+    color: var(--background-color);
     border: 0;
     border-radius: 1em;
 }

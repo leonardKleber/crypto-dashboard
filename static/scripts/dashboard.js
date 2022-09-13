@@ -1,6 +1,6 @@
 var chart = new Chart(
     document.getElementById('chart'),
-    config.chart.total
+    config.chart.year
 );
 
 function configure_dashboard(timeframe_id) {
