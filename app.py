@@ -5,11 +5,11 @@ from src.api import get_all_available_coins
 
 # A pseudo database for testing purposes.
 USER_ASSETS = [
-    {'id': 1, 'user_id': 1, 'coin': 'bitcoin', 'amount': 1, 'date': '01-01-2021'},
-    {'id': 2, 'user_id': 1, 'coin': 'cardano', 'amount': 100, 'date': '30-07-2021'},
-    {'id': 3, 'user_id': 1, 'coin': 'ethereum', 'amount': 1, 'date': '01-01-2021'},
-    {'id': 4, 'user_id': 1, 'coin': 'bitcoin', 'amount': 1, 'date': '01-12-2020'},
-    {'id': 5, 'user_id': 1, 'coin': 'bitcoin', 'amount': 5, 'date': '01-01-2022'}
+    {'id': 1, 'user_id': 1, 'coin': 'bitcoin', 'amount': 1.0, 'date': '01-01-2021'},
+    {'id': 2, 'user_id': 1, 'coin': 'cardano', 'amount': 100.0, 'date': '30-07-2021'},
+    {'id': 3, 'user_id': 1, 'coin': 'ethereum', 'amount': 1.0, 'date': '01-01-2021'},
+    {'id': 4, 'user_id': 1, 'coin': 'bitcoin', 'amount': 1.0, 'date': '01-12-2020'},
+    {'id': 5, 'user_id': 1, 'coin': 'bitcoin', 'amount': 5.0, 'date': '01-01-2022'}
 ]
 
 # Default currency of the application.
@@ -73,7 +73,7 @@ def add_asset():
                 'id': 'x',
                 'user_id': 1,
                 'coin': coin,
-                'amount': int(amount),
+                'amount': float(amount),
                 'date': date
             })
             return redirect(url_for('dashboard'))
