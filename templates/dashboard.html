@@ -17,7 +17,11 @@
     <div class="dashboard">
         <div class="total_numbers">
             <label>{{ config['worth'] }}$</label>&nbsp;
-            <label class="performance">{{ config['performance'] }}%</label>
+            {% if config['performance'] > 0 %}
+            <label class="positive_performance">{{ config['performance'] }}%</label>
+            {% else %}
+            <label class="negative_performance">{{ config['performance'] }}%</label>
+            {% endif %}
         </div>
         <div class="chart_div" alig>
             <canvas id="chart" class="chart"></canvas> 
@@ -45,7 +49,11 @@
                 </td>
                 <td>{{ i['cost'] }}$</td>
                 <td>{{ i['worth'] }}$</td>
-                <td>{{ i['gain'] }}%</td>
+                {% if i['gain'] > 0 %}
+                <td><div class="positive_gain">{{ i['gain'] }}%</div></td>
+                {% else %}
+                <td><div class="negative_gain">{{ i['gain'] }}%</div></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>

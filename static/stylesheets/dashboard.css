@@ -43,10 +43,40 @@ html, body {
     font-weight: 600;
 }
 
-.performance {
+.positive_performance {
     right: 0;
     font-weight: 500;
     font-size: 0.5em;
+    background-color: rgb(192,255,192);
+    color: rgb(0,255,0);
+    padding: 0.15em;
+    border-radius: 0.25em;
+}
+
+.negative_performance {
+    right: 0;
+    font-weight: 500;
+    font-size: 0.5em;
+    background-color: rgb(255,192,192);
+    color: rgb(255,0,0);
+    padding: 0.15em;
+    border-radius: 0.25em;
+}
+
+.positive_gain {
+    background-color: rgb(192,255,192);
+    color: rgb(0,255,0);
+    display: inline-block;
+    padding: 0.15em;
+    border-radius: 0.2em;
+}
+
+.negative_gain {
+    background-color: rgb(255,192,192);
+    color: rgb(255,0,0);
+    display: inline-block;
+    padding: 0.15em;
+    border-radius: 0.25em;
 }
 
 .chart_button {
