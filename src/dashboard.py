@@ -1,7 +1,7 @@
 import datetime
 from src.api import get_max_historical_data
 from src.crypto import cut_historical_data
-from src.chart import generate_chart
+from src.chart import generate_chart, generate_doughnut_chart
 
 
 # Generates a configuration json for the dashboard page.
@@ -16,7 +16,8 @@ def generate_dashboard(user_assets, currency):
             'chart': generate_user_charts(summed_data, performance),
             'performance': performance,
             'worth': get_portfolio_worth(summed_data),
-            'assets': generate_user_assets(user_assets, all_coin_data)
+            'assets': generate_user_assets(user_assets, all_coin_data),
+            'doughnut': generate_doughnut_chart(user_assets, all_coin_data)
         }
 
 
