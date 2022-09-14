@@ -51,6 +51,22 @@ html, body {
     margin: 1%;
 }
 
+.allocation_div {
+    width: 100%;
+}
+
+.doughnut {
+    position: absolute;
+    width: 50%;
+    left: 0;
+}
+
+.allocation_table {
+    position: absolute;
+    width: 50%;
+    right: 0;
+}
+
 .total_numbers {
     font-size: 3em;
     font-weight: 600;
@@ -150,4 +166,5 @@ a {
     color: var(--background-color);
     border: 0;
     border-radius: 1em;
+    margin-bottom: 1.1em;
 }

@@ -68,25 +68,15 @@ def generate_doughnut_chart(user_assets, all_coin_data):
             'labels': coin_names,
             'datasets': [{
                 'data': coin_worths,
-                'backgroundColor': generate_colors(coin_names),
-            }]
+                'backgroundColor': 'rgb(0,0,0)',
+            }],
+        },
+        'options': {
+            'plugins': {
+                'legend': {
+                    'display': False
+                }
+            }
         }
     }
     return config
-
-
-# Generates a random color for each coin.
-def generate_colors(coin_names):
-    color_list = []
-    color_values = [
-        'rgb(32,32,32)',
-        'rgb(64,64,64)',
-        'rgb(96,96,96)',
-        'rgb(128,128,128)',
-        'rgb(160,160,160)',
-        'rgb(192,192,192)',
-        'rgb(244,244,244)'
-    ]
-    for i in coin_names:
-        color_list.append(color_values[random.randint(0, len(color_values)-1)])
-    return color_list

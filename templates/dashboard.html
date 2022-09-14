@@ -23,7 +23,7 @@
             <label class="negative_performance">{{ config['performance'] }}%</label>
             {% endif %}
         </div>
-        <div class="chart_div">
+        <div>
             <canvas id="chart" class="chart"></canvas> 
         </div>
         <div align="center">
@@ -62,8 +62,24 @@
                 <div class="add">+</div>
             </a>
         </div>
-        <div>
-            <canvas id="doughnut_chart"></canvas> 
+        <div class="allocation_div">
+            <label class="doughnut">
+                <canvas id="doughnut_chart"></canvas>
+            </label>
+            <label class="allocation_table">
+                <table>
+                    <tr>
+                        <th>Coin</th>
+                        <th>Allocation</th>
+                    </tr>
+                    {% for i in config['allocation'] %}
+                    <tr>
+                        <td>{{ i['coin'] }}</td>
+                        <td>{{ i['percentage'] }}%</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </label>
         </div>
     </div>
 </body>

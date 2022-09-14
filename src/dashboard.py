@@ -17,7 +17,8 @@ def generate_dashboard(user_assets, currency):
             'performance': performance,
             'worth': get_portfolio_worth(summed_data),
             'assets': generate_user_assets(user_assets, all_coin_data),
-            'doughnut': generate_doughnut_chart(user_assets, all_coin_data)
+            'doughnut': generate_doughnut_chart(user_assets, all_coin_data),
+            'allocation': generate_asset_allocation(user_assets, all_coin_data)
         }
 
 
@@ -165,3 +166,38 @@ def check_valid_date(date):
     if year < 1:
         return False
     return True
+
+
+# Generates a dictionary with every asset and its allocation.
+def generate_asset_allocation(user_assets, all_coin_data):
+    coin_names = []
+    coin_amounts = []
+    for i in user_assets:
+        if i['coin'] in coin_names:
+            index = coin_names.index(i['coin'])
+            coin_amounts[index] = coin_amounts[index] + i['amount']
+        else:
+            coin_names.append(i['coin'])
+            coin_amounts.append(i['amount'])
+    coin_worths = []
+    counter = 0
+    for i in all_coin_data:
+        price = list(reversed(i['data']))[0]
+        worth = price * coin_amounts[counter]
+        coin_worths.append(worth)
+        counter = counter + 1
+    total_worth = 0
+    for i in coin_worths:
+        total_worth = total_worth + i
+    coin_percentages = []
+    for i in coin_worths:
+        coin_percentages.append(i / total_worth)
+    assets = []
+    counter = 0
+    for i in coin_names:
+        assets.append({
+            'coin': i.upper(),
+            'percentage': 100.0 * round(coin_percentages[counter], 2)
+        })
+        counter = counter + 1
+    return assets
