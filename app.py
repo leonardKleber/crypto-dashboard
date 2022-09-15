@@ -43,58 +43,61 @@ def dashboard():
 
 @app.route('/add_asset', methods=['GET', 'POST'])
 def add_asset():
-    supported_coins = get_all_available_coins()
-    if request.method == 'POST':
-        coin = request.form.get('coin')
-        amount = request.form.get('amount')
-        date = request.form.get('date')
-
-        error_count = 0
-        if coin in supported_coins:
-            coin_message = ''
-        else:
-            coin_message = 'The coin you entered is not supported by the CoinGecko API.'
-            error_count = error_count + 1
-        amount_message = ''
-        if check_valid_date(date) == False:
-            date_message = 'The date you entered is unvalid. Please stick to the format: dd-mm-yyyy'
-            error_count = error_count + 1
-        else:
-            date_message = ''
-        if error_count > 0:
-            return render_template(
-                'add_asset.html',
-                coins=supported_coins,
-                messages={
-                    'coin': coin_message,
-                    'amount': amount_message,
-                    'date': date_message
-                }
-            )
-        else:
-            USER_ASSETS.append({
-                'id': 'x',
-                'user_id': 1,
-                'coin': coin,
-                'amount': float(amount),
-                'date': date
-            })
-            return redirect(url_for('dashboard'))
+    if len(USER_ASSETS) == 40:
+        return redirect(url_for('dashboard'))
     else:
-        if supported_coins == 'connection error':
-            return render_template('connection_error.html')
-        elif supported_coins == 'rate limit reached':
-            return render_template('rate_limit.html')
+        supported_coins = get_all_available_coins()
+        if request.method == 'POST':
+            coin = request.form.get('coin')
+            amount = request.form.get('amount')
+            date = request.form.get('date')
+
+            error_count = 0
+            if coin in supported_coins:
+                coin_message = ''
+            else:
+                coin_message = 'The coin you entered is not supported by the CoinGecko API.'
+                error_count = error_count + 1
+            amount_message = ''
+            if check_valid_date(date) == False:
+                date_message = 'The date you entered is unvalid. Please stick to the format: dd-mm-yyyy'
+                error_count = error_count + 1
+            else:
+                date_message = ''
+            if error_count > 0:
+                return render_template(
+                    'add_asset.html',
+                    coins=supported_coins,
+                    messages={
+                        'coin': coin_message,
+                        'amount': amount_message,
+                        'date': date_message
+                    }
+                )
+            else:
+                USER_ASSETS.append({
+                    'id': 'x',
+                    'user_id': 1,
+                    'coin': coin,
+                    'amount': float(amount),
+                    'date': date
+                })
+                return redirect(url_for('dashboard'))
         else:
-            return render_template(
-                'add_asset.html',
-                coins=supported_coins,
-                messages={
-                    'coin': '',
-                    'amount': '',
-                    'date': ''
-                }
-            )
+            if supported_coins == 'connection error':
+                return render_template('connection_error.html')
+            elif supported_coins == 'rate limit reached':
+                return render_template('rate_limit.html')
+            else:
+                return render_template(
+                    'add_asset.html',
+                    coins=supported_coins,
+                    messages={
+                        'coin': '',
+                        'amount': '',
+                        'date': ''
+                    }
+                )
 
 
 if __name__ == '__main__':
