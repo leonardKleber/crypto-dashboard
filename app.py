@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from src.dashboard import generate_dashboard, check_valid_date
+from src.dashboard import generate_dashboard, check_valid_date, get_number_of_coins
 from src.api import get_all_available_coins
 
 
@@ -37,7 +37,7 @@ def dashboard():
 
 @app.route('/add_asset', methods=['GET', 'POST'])
 def add_asset():
-    if len(USER_ASSETS) == 40:
+    if get_number_of_coins(USER_ASSETS) == 40:
         return redirect(url_for('dashboard'))
     else:
         supported_coins = get_all_available_coins()

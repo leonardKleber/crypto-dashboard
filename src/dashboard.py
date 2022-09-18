@@ -201,3 +201,14 @@ def generate_asset_allocation(user_assets, all_coin_data):
         })
         counter = counter + 1
     return assets
+
+
+# Retrieves the number of different coins of a users portfolio.
+def get_number_of_coins(user_assets):
+    coins = []
+    for i in user_assets:
+        if i['coin'] in coins:
+            pass
+        else:
+            coins.append(i['coin'])
+    return len(coins)

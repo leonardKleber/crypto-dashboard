@@ -27,7 +27,7 @@
                 </div>
                 <div id="amount_message" class="error"></div>
                 <div class="element">
-                    <label>Date</label>
+                    <label>Date </label><label class="side_note">(dd/mm/yyyy)</label>
                     <label class="right"><input type="text" name="date"></label>
                 </div>
                 <div id="date_message" class="error"></div>
@@ -46,9 +46,6 @@
 <script>
     const coins = JSON.parse('{{ coins | tojson | safe }}');
     const messages = JSON.parse('{{ messages | tojson | safe }}');
-
-    console.log(messages)
-
     document.getElementById("coin_message").innerHTML = messages.coin;
     document.getElementById("amount_message").innerHTML = messages.amount;
     document.getElementById("date_message").innerHTML = messages.date;

@@ -3,7 +3,9 @@ import requests
 
 # Handles all API calls and checks for connection and URL errors.
 def get_api_response(url):
+    print('API CALL TO: ' + url)
     response = requests.get(url)
+    print('RESPONSE: ' + str(response))
     if response.status_code == 200:
         json = response.json()
         return json
