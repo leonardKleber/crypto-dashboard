@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MVW - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="/static/stylesheets/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="headline" align="center">Login to MVW!</div>
+    <div class="content">
+        <form action="/login" method="post">
+            <div class="element">
+                <div>Username</div>
+                <input class="input" name="username" type="text">
+                <div class="username_message">{{ username_message }}</div>
+            </div>
+            <div class="element">
+                <div>Password</div>
+                <input class="input" name="password" type="password">
+                <div class="password_message">{{ password_message }}</div>
+            </div>
+            <div class="link" align="center">
+                <a href="/register">
+                    You don't have an account yet? Register here!
+                </a>
+            </div>
+            <div align="center">
+                <button class="button" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
