@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE assets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER FOREIGN KEY REFERENCES users(id),
+    user_id INTEGER NOT NULL,
     coin TEXT NOT NULL,
     amount FLOAT NOT NULL,
     date TEXT NOT NULL
