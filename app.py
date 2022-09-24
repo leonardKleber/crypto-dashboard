@@ -1,8 +1,6 @@
 from auth import *
-from src.api import get_all_available_coins
 from db import get_all_asset_data, insert_into_assets
 from flask import Flask, session, render_template, request, redirect, url_for
-from src.dashboard import generate_dashboard, check_valid_date, get_number_of_coins
 
 
 app = Flask(__name__)
@@ -35,86 +33,7 @@ def dashboard():
         if session['id'] == None:
             return redirect(url_for('login'))
         else:
-            user_assets = get_user_assets(session['id'])
-            if len(user_assets) == 0:
-                return render_template('init.html')
-            else:
-                config = generate_dashboard(user_assets, 'usd')
-                if config == 'connection error':
-                    return render_template('connection_error.html')
-                elif config == 'rate limit reached':
-                    return render_template('rate_limit.html')
-                else:
-                    return render_template(
-                        'dashboard.html',
-                        config=config
-                    )
-    else:
-        return redirect(url_for('login'))
-
-
-@app.route('/add_asset', methods=['GET', 'POST'])
-def add_asset():
-    if 'id' in session:
-        if session['id'] == None:
-            return redirect(url_for('login'))
-        else:
-            user_assets = get_user_assets(session['id'])
-            if get_number_of_coins(user_assets) == 40:
-                return redirect(url_for('dashboard'))
-            else:
-                supported_coins = get_all_available_coins()
-                if request.method == 'POST':
-                    coin = request.form.get('coin')
-                    amount = request.form.get('amount')
-                    date = request.form.get('date')
-                    error_count = 0
-                    if coin in supported_coins:
-                        coin_message = ''
-                    else:
-                        coin_message = 'The coin you entered is not supported by the CoinGecko API.'
-                        error_count = error_count + 1
-                    amount_message = ''
-                    if check_valid_date(date) == False:
-                        date_message = 'The date you entered is unvalid. Please stick to the format: dd-mm-yyyy'
-                        error_count = error_count + 1
-                    else:
-                        date_message = ''
-                    if error_count > 0:
-                        return render_template(
-                            'add_asset.html',
-                            coins=supported_coins,
-                            messages={
-                                'coin': coin_message,
-                                'amount': amount_message,
-                                'date': date_message
-                            }
-                        )
-                    else:
-                        insert_into_assets(session['id'], coin, float(amount), date)
-                        #USER_ASSETS.append({
-                        #    'id': 'x',
-                        #    'user_id': 1,
-                        #    'coin': coin,
-                        #    'amount': float(amount),
-                        #    'date': date
-                        #})
-                        return redirect(url_for('dashboard'))
-                else:
-                    if supported_coins == 'connection error':
-                        return render_template('connection_error.html')
-                    elif supported_coins == 'rate limit reached':
-                        return render_template('rate_limit.html')
-                    else:
-                        return render_template(
-                            'add_asset.html',
-                            coins=supported_coins,
-                            messages={
-                                'coin': '',
-                                'amount': '',
-                                'date': ''
-                            }
-                        )
+            return 'This is the Dashboard'
     else:
         return redirect(url_for('login'))
 
