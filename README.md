@@ -1,5 +1,5 @@
 # My Virtual Wallet
-A cryptocurrency portfolio tracking tool and analyzer built with Flask, CoinGecko API and Chart.js. 
+A cryptocurrency portfolio tracking tool and analyzer built with Flask, CoinGecko API, Chart.js and SQLite.
 
 This project is a remastered version of my final project for HarvardX's CS50 online course. You can find a short presentation of the old project here:
 ```
